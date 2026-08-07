@@ -6,7 +6,7 @@ import { connectDB } from "./config/db.js";
 
 console.log("DB_USER:", process.env.DB_USER);
 console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
