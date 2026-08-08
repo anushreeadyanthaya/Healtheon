@@ -1,20 +1,38 @@
+import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
+
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+
+
 dotenv.config();
 
-import app from "./app.js";
-import { connectDB } from "./config/db.js";
 
-console.log("DB_USER:", process.env.DB_USER);
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-console.log("JWT_SECRET:", process.env.JWT_SECRET);
+const app = express();
+
+
+// Middlewares
+app.use(cors());
+app.use(express.json());
+
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+
+
+// Test Route
+app.get("/", (req, res) => {
+    res.json({
+        message: "Welcome to Healtheon API"
+    });
+});
+
+
+// Server
 const PORT = process.env.PORT || 5000;
 
-const startServer = async () => {
-  await connectDB();
-
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-  });
-};
-
-startServer();
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
