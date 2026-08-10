@@ -40,6 +40,9 @@ export const protect = (req, res, next) => {
         req.user = decoded;
 
 
+        console.log("Authenticated user:", req.user);
+
+
         next();
 
 
@@ -52,4 +55,25 @@ export const protect = (req, res, next) => {
             message: "Invalid or expired token."
         });
     }
+};
+
+
+// ROLE AUTHORIZATION
+export const authorize = (...allowedRoles) => {
+    return (req, res, next) => {
+
+        console.log("User role:", req.user?.role);
+        console.log("Allowed roles:", allowedRoles);
+
+
+        if (!req.user || !allowedRoles.includes(req.user.role)) {
+            return res.status(403).json({
+                success: false,
+                message: "Access denied. You do not have permission."
+            });
+        }
+
+
+        next();
+    };
 };

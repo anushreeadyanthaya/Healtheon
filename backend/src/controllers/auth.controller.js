@@ -8,13 +8,31 @@ export const register = async (req, res) => {
     try {
         console.log("Received body:", req.body);
 
-        const { full_name, email, password, role } = req.body;
+
+        const {
+            full_name,
+            email,
+            password,
+            role
+        } = req.body;
 
 
         if (!full_name || !email || !password || !role) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required"
+            });
+        }
+
+
+        // Validate role
+        const allowedRoles = ["patient", "doctor"];
+
+
+        if (!allowedRoles.includes(role)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid role"
             });
         }
 
@@ -86,8 +104,6 @@ export const register = async (req, res) => {
 };
 
 
-
-
 // LOGIN USER
 export const login = async (req, res) => {
     try {
@@ -95,7 +111,10 @@ export const login = async (req, res) => {
         console.log("Received body:", req.body);
 
 
-        const { email, password } = req.body;
+        const {
+            email,
+            password
+        } = req.body;
 
 
         if (!email || !password) {
