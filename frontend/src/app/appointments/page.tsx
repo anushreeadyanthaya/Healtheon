@@ -24,6 +24,7 @@ export default function AppointmentsPage() {
   const [doctorId, setDoctorId] = useState("");
   const [doctorName, setDoctorName] = useState("");
   const [appointmentDate, setAppointmentDate] = useState("");
+  const [appointmentTime, setAppointmentTime] = useState("");
   const [reason, setReason] = useState("");
 
   const getAppointments = async () => {
@@ -89,6 +90,14 @@ export default function AppointmentsPage() {
       return;
     }
 
+    if (!appointmentDate || !appointmentTime) {
+      setError("Please enter both the appointment date and time.");
+      setCreating(false);
+      return;
+    }
+
+    const combinedDateTime = `${appointmentDate}T${appointmentTime}`;
+
     try {
       const response = await fetch(
         "http://localhost:5000/api/appointments",
@@ -101,7 +110,7 @@ export default function AppointmentsPage() {
           body: JSON.stringify({
             doctorId,
             doctorName,
-            appointmentDate,
+            appointmentDate: combinedDateTime,
             reason,
             status: "scheduled",
           }),
@@ -120,6 +129,7 @@ export default function AppointmentsPage() {
       setDoctorId("");
       setDoctorName("");
       setAppointmentDate("");
+      setAppointmentTime("");
       setReason("");
 
       await getAppointments();
@@ -135,10 +145,8 @@ export default function AppointmentsPage() {
 
   return (
     <main className="min-h-screen bg-[#f7faf9] text-[#17221f]">
-
       <header className="border-b border-[#e1ebe7] bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-
           <Link href="/dashboard" className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#176b5b] text-lg font-bold text-white">
               H
@@ -155,12 +163,10 @@ export default function AppointmentsPage() {
           >
             ← Dashboard
           </Link>
-
         </div>
       </header>
 
       <div className="mx-auto max-w-6xl px-6 py-10">
-
         <section>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#176b5b]">
             Healthcare scheduling
@@ -177,7 +183,6 @@ export default function AppointmentsPage() {
         </section>
 
         <section className="mt-10 rounded-[28px] border border-[#e1ebe7] bg-white p-6 shadow-sm sm:p-8">
-
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[#176b5b]">
               New appointment
@@ -208,7 +213,6 @@ export default function AppointmentsPage() {
             onSubmit={handleCreateAppointment}
             className="mt-7 grid gap-5 md:grid-cols-2"
           >
-
             <div>
               <label
                 htmlFor="doctorId"
@@ -257,7 +261,7 @@ export default function AppointmentsPage() {
 
               <input
                 id="appointmentDate"
-                type="datetime-local"
+                type="date"
                 value={appointmentDate}
                 onChange={(e) => setAppointmentDate(e.target.value)}
                 required
@@ -266,6 +270,24 @@ export default function AppointmentsPage() {
             </div>
 
             <div>
+              <label
+                htmlFor="appointmentTime"
+                className="mb-2 block text-sm font-medium text-[#34423e]"
+              >
+                Appointment time
+              </label>
+
+              <input
+                id="appointmentTime"
+                type="time"
+                value={appointmentTime}
+                onChange={(e) => setAppointmentTime(e.target.value)}
+                required
+                className="w-full rounded-2xl border border-[#dce7e3] bg-[#fbfdfc] px-4 py-3.5 text-sm outline-none transition focus:border-[#176b5b] focus:bg-white focus:ring-4 focus:ring-[#176b5b]/10"
+              />
+            </div>
+
+            <div className="md:col-span-2">
               <label
                 htmlFor="reason"
                 className="mb-2 block text-sm font-medium text-[#34423e]"
@@ -295,15 +317,11 @@ export default function AppointmentsPage() {
                   : "Request appointment"}
               </button>
             </div>
-
           </form>
-
         </section>
 
         <section className="mt-10">
-
           <div className="flex items-center justify-between">
-
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[#176b5b]">
                 Your appointments
@@ -320,24 +338,20 @@ export default function AppointmentsPage() {
                 ? "appointment"
                 : "appointments"}
             </span>
-
           </div>
 
           {loading && (
             <div className="mt-6 rounded-[28px] border border-[#e1ebe7] bg-white p-10 text-center shadow-sm">
-
               <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-[#dcebe6] border-t-[#176b5b]" />
 
               <p className="mt-4 text-sm text-[#71807b]">
                 Loading your appointments...
               </p>
-
             </div>
           )}
 
           {!loading && appointments.length === 0 && (
             <div className="mt-6 rounded-[28px] border border-[#e1ebe7] bg-white p-10 text-center shadow-sm">
-
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-[#e8f5f1] text-2xl">
                 📅
               </div>
@@ -349,23 +363,18 @@ export default function AppointmentsPage() {
               <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[#71807b]">
                 Your appointments will appear here after you request one.
               </p>
-
             </div>
           )}
 
           {!loading && appointments.length > 0 && (
             <div className="mt-6 space-y-5">
-
               {appointments.map((appointment) => (
                 <article
                   key={appointment.id}
                   className="rounded-[28px] border border-[#e1ebe7] bg-white p-6 shadow-sm sm:p-8"
                 >
-
                   <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-
                     <div>
-
                       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#176b5b]">
                         Appointment
                       </p>
@@ -374,19 +383,15 @@ export default function AppointmentsPage() {
                         {appointment.reason ||
                           "Healthcare appointment"}
                       </h3>
-
                     </div>
 
                     <span className="w-fit rounded-full bg-[#e8f5f1] px-3 py-1 text-xs font-semibold capitalize text-[#176b5b]">
                       {appointment.status || "scheduled"}
                     </span>
-
                   </div>
 
                   <div className="mt-6 grid gap-4 sm:grid-cols-2">
-
                     <div className="rounded-2xl bg-[#f7faf9] p-5">
-
                       <p className="text-xs font-semibold uppercase tracking-wide text-[#9aa7a2]">
                         Date & time
                       </p>
@@ -404,11 +409,9 @@ export default function AppointmentsPage() {
                             })
                           : "Not available"}
                       </p>
-
                     </div>
 
                     <div className="rounded-2xl bg-[#f7faf9] p-5">
-
                       <p className="text-xs font-semibold uppercase tracking-wide text-[#9aa7a2]">
                         Doctor
                       </p>
@@ -418,21 +421,14 @@ export default function AppointmentsPage() {
                           appointment.doctor_id ||
                           "Not available"}
                       </p>
-
                     </div>
-
                   </div>
-
                 </article>
               ))}
-
             </div>
           )}
-
         </section>
-
       </div>
-
     </main>
   );
 }
