@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import Link from "next/link";
 export default function Home() {
   const [showTopButton, setShowTopButton] = useState(false);
 
@@ -31,23 +31,22 @@ export default function Home() {
       <nav className="sticky top-0 z-50 border-b border-[#dce8e3]/80 bg-[#f6faf8]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
 
-          <a href="#top" className="flex items-center gap-3">
-            <div className="relative flex h-10 w-10 items-center justify-center rounded-[13px] bg-[#176b5b] text-lg font-bold text-white shadow-[0_8px_24px_rgba(23,107,91,0.2)]">
-              H
-              <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full border-2 border-[#f6faf8] bg-[#63c8aa]" />
-            </div>
+         <a href="#top" className="flex items-center gap-3">
+        <div className="relative flex h-10 w-10 items-center justify-center rounded-[13px] bg-[#176b5b] text-lg font-bold text-white shadow-[0_8px_24px_rgba(23,107,91,0.2)]">
+        H
+        <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full border-2 border-[#f6faf8] bg-[#63c8aa]" />
+        </div>
 
-            <div>
-              <p className="text-[19px] font-semibold tracking-[-0.02em] text-[#17221f]">
-                Healtheon
-              </p>
+  <div>
+    <p className="text-[19px] font-semibold tracking-[-0.02em] text-[#17221f]">
+      Healtheon
+    </p>
 
-              <p className="hidden text-[9px] font-semibold uppercase tracking-[0.2em] text-[#84938d] sm:block">
-                Connected healthcare
-              </p>
-            </div>
-          </a>
-
+    <p className="hidden text-[9px] font-semibold uppercase tracking-[0.2em] text-[#84938d] sm:block">
+      Connected healthcare
+    </p>
+  </div>
+</a>
 
           {/* Navigation */}
           <div className="hidden items-center gap-8 text-[13px] font-medium text-[#63716d] md:flex">
@@ -85,13 +84,19 @@ export default function Home() {
 
           <div className="flex items-center gap-2">
 
-            <button className="hidden rounded-full px-4 py-2.5 text-[13px] font-medium text-[#3b4945] transition hover:bg-[#e9f1ee] sm:block">
-              Log in
-            </button>
+            <Link
+            href="/login"
+            className="hidden rounded-full px-4 py-2.5 text-[13px] font-medium text-[#3b4945] transition hover:bg-[#e9f1ee] sm:block"
+            >
+            Log in
+            </Link>
 
-            <button className="rounded-full bg-[#176b5b] px-5 py-2.5 text-[13px] font-semibold text-white shadow-[0_8px_24px_rgba(23,107,91,0.17)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#125848] hover:shadow-[0_12px_30px_rgba(23,107,91,0.25)]">
-              Get started
-            </button>
+            <Link
+            href="/register"
+            className="rounded-full bg-[#176b5b] px-5 py-2.5 text-[13px] font-semibold text-white shadow-[0_8px_24px_rgba(23,107,91,0.17)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#125848] hover:shadow-[0_12px_30px_rgba(23,107,91,0.25)]"
+            >
+            Get started
+            </Link>
 
           </div>
 
@@ -179,15 +184,16 @@ export default function Home() {
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
 
-              <button className="group rounded-full bg-[#176b5b] px-7 py-3.5 text-[13px] font-semibold text-white shadow-[0_14px_35px_rgba(23,107,91,0.2)] transition duration-300 hover:-translate-y-1 hover:bg-[#125848] hover:shadow-[0_18px_40px_rgba(23,107,91,0.27)]">
+              <Link
+              href="/register"
+              className="group rounded-full bg-[#176b5b] px-7 py-3.5 text-[13px] font-semibold text-white shadow-[0_14px_35px_rgba(23,107,91,0.2)] transition duration-300 hover:-translate-y-1 hover:bg-[#125848] hover:shadow-[0_18px_40px_rgba(23,107,91,0.27)]"
+              >
+              Get started
 
-                Get started
-
-                <span className="ml-2 inline-block transition group-hover:translate-x-1">
-                  →
-                </span>
-
-              </button>
+              <span className="ml-2 inline-block transition group-hover:translate-x-1">
+              →
+              </span>
+              </Link>
 
 
               <a
@@ -1184,15 +1190,15 @@ export default function Home() {
               </div>
 
 
-              <button className="group w-fit shrink-0 rounded-full bg-white px-7 py-3.5 text-[13px] font-semibold text-[#153d35] shadow-[0_12px_30px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:bg-[#edf7f4]">
-
-                Get started
-
-                <span className="ml-2 inline-block transition group-hover:translate-x-1">
-                  →
-                </span>
-
-              </button>
+              <Link
+              href="/register"
+              className="group rounded-full bg-[#176b5b] px-7 py-3.5 text-[13px] font-semibold text-white shadow-[0_14px_35px_rgba(23,107,91,0.2)] transition duration-300 hover:-translate-y-1 hover:bg-[#125848] hover:shadow-[0_18px_40px_rgba(23,107,91,0.27)]"
+              >
+              Get started
+              <span className="ml-2 inline-block transition group-hover:translate-x-1">
+              →
+              </span>
+              </Link>
 
             </div>
 
