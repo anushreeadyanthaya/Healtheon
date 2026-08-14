@@ -130,7 +130,7 @@ export default function DashboardPage() {
         <section className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
           <Link
-            href="/appointments"
+            href={user?.role === "doctor" ? "/doctor-dashboard" : "/appointments"}
             className="group rounded-[28px] border border-[#e1ebe7] bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(34,70,61,0.08)]"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#e8f5f1] text-xl">

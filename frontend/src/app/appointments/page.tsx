@@ -385,8 +385,18 @@ export default function AppointmentsPage() {
                       </h3>
                     </div>
 
-                    <span className="w-fit rounded-full bg-[#e8f5f1] px-3 py-1 text-xs font-semibold capitalize text-[#176b5b]">
-                      {appointment.status || "scheduled"}
+                    <span
+                    className={`w-fit rounded-full px-3 py-1 text-xs font-semibold capitalize ${
+                      appointment.status === "cancelled"
+                        ? "bg-[#fff1f0] text-[#b84f47]"
+                        : appointment.status === "completed"
+                        ? "bg-[#eef4ff] text-[#3f63a8]"
+                        : appointment.status === "confirmed"
+                        ? "bg-[#e8f5f1] text-[#176b5b]"
+                        : "bg-[#fff8e6] text-[#a87516]"
+                    }`}
+                    >
+                    {appointment.status || "scheduled"}
                     </span>
                   </div>
 
