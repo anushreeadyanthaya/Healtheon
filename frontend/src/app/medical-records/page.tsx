@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import API_URL from "@/lib/api";
 
 type MedicalRecord = {
   id: string;
@@ -29,7 +30,7 @@ export default function MedicalRecordsPage() {
     const getRecords = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/medical-records",
+          `${API_URL}/api/medical-records`,
           {
             method: "GET",
             headers: {

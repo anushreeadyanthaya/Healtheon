@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import API_URL from "@/lib/api";
 
 type User = {
   id: string;
@@ -25,7 +26,7 @@ export default function ProfilePage() {
     const getProfile = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/users/profile",
+          `${API_URL}/api/users/profile`,
           {
             method: "GET",
             headers: {

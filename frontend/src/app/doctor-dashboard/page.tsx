@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import API_URL from "@/lib/api";
 
 type Appointment = {
   id: string;
@@ -38,7 +39,7 @@ export default function DoctorDashboard() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/profile",
+        `${API_URL}/api/users/profile`,
         {
           method: "GET",
           headers: {
@@ -87,7 +88,7 @@ export default function DoctorDashboard() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/appointments/doctor/my-appointments",
+        `${API_URL}/api/appointments/doctor/my-appointments`,
         {
           method: "GET",
           headers: {
@@ -149,7 +150,7 @@ export default function DoctorDashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/appointments/${appointmentId}/status`,
+        `${API_URL}/api/appointments/${appointmentId}/status`,
         {
           method: "PATCH",
           headers: {

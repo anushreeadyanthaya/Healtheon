@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
+import API_URL from "@/lib/api";
 
 type Appointment = {
   id: string;
@@ -37,7 +38,7 @@ export default function AppointmentsPage() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/appointments",
+        `${API_URL}/api/appointments`,
         {
           method: "GET",
           headers: {
@@ -100,7 +101,7 @@ export default function AppointmentsPage() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/appointments",
+        `${API_URL}/api/appointments`,
         {
           method: "POST",
           headers: {
