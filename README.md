@@ -1,18 +1,25 @@
 # Healtheon
 
-Healtheon is a full-stack Healthcare Management Platform being developed to simplify and digitize healthcare workflows. The project focuses on building a secure, scalable, and reliable application using modern web technologies.
+Healtheon is a full-stack Healthcare Management Platform developed to simplify and digitize healthcare workflows. The project focuses on building a secure, scalable, reliable, and user-friendly application using modern web technologies.
 
 The objective of Healtheon is to provide a centralized platform where patients and healthcare providers can manage essential healthcare operations efficiently while maintaining security, privacy, and reliable access to information.
 
 ## Project Status
 
-Healtheon is currently under active development.
+Healtheon is currently in the **finalization and deployment stage**.
 
 ### Current Progress
 
-**Overall Project Progress: ~83%**
+**Overall Project Progress: ~90%**
 
-The core backend functionality has been completed. The remaining work is focused mainly on frontend integration, complete user flows, testing, UI/UX refinement, deployment, and final documentation.
+The core backend and frontend application have been completed and integrated successfully. The frontend has also been made production-buildable with configurable backend API connectivity.
+
+The remaining work is focused mainly on:
+
+* Final handbook and technical documentation
+* Production deployment
+* Final production/release verification
+* Final project cleanup where required
 
 ### Completed
 
@@ -49,33 +56,46 @@ The core backend functionality has been completed. The remaining work is focused
 * Git version control
 * GitHub repository integration
 * Regular commits and project version tracking
+* Login frontend interface
+* Registration frontend interface
+* Patient dashboard
+* Profile interface
+* Appointment interface
+* Medical records interface
+* Doctor dashboard
+* Frontend authentication flow
+* Frontend protected-page handling
+* Frontend appointment management
+* Frontend medical records integration
+* Frontend doctor dashboard integration
+* Frontend role-based doctor access
+* Frontend loading and error states
+* Frontend/backend API integration
+* Centralized frontend API configuration
+* Environment-based frontend backend URL configuration
+* Production frontend build verification
+* Frontend TypeScript verification
+* Frontend static page generation verification
+* Frontend changes committed to Git
+* Frontend changes pushed to GitHub
 
 ### Remaining
 
-* Complete frontend-backend integration
-* Complete patient dashboard functionality
-* Complete doctor dashboard functionality
-* Frontend authentication flows
-* Frontend appointment management
-* Frontend medical records interface
-* Complete frontend role-based navigation and protection
-* Loading and error states
-* Responsive UI refinement
-* Full end-to-end testing
-* Final security review
 * Production deployment
-* Final documentation and handbook
-* Final project cleanup and optimization
+* Final production/release verification
+* Final handbook and technical documentation completion
+* Final project cleanup and optimization where required
 
 ## Technology Stack
 
 ### Frontend
 
-* Next.js
+* Next.js 16.3.0
 * React
 * TypeScript
 * Tailwind CSS
 * App Router
+* Turbopack
 
 ### Backend
 
@@ -87,6 +107,7 @@ The core backend functionality has been completed. The remaining work is focused
 
 * PostgreSQL
 * pgAdmin
+* `pg` Node.js PostgreSQL client
 
 ### Authentication & Security
 
@@ -95,6 +116,7 @@ The core backend functionality has been completed. The remaining work is focused
 * Protected API routes
 * Role-based authorization
 * Resource ownership validation
+* Environment variables for sensitive configuration
 
 ### Development & Version Control
 
@@ -126,6 +148,21 @@ Healtheon/
 │   └── .env
 │
 ├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── appointments/
+│   │   │   ├── dashboard/
+│   │   │   ├── doctor-dashboard/
+│   │   │   ├── login/
+│   │   │   ├── medical-records/
+│   │   │   ├── profile/
+│   │   │   └── register/
+│   │   │
+│   │   └── lib/
+│   │       └── api.ts
+│   │
+│   ├── package.json
+│   └── .env.local
 │
 ├── docs/
 │
@@ -165,6 +202,8 @@ Sensitive information such as stored passwords is not returned through profile A
 
 The backend includes functionality for doctor-related operations and authenticated doctor access to relevant appointment information.
 
+Doctor authorization is enforced through authenticated user roles.
+
 ### Appointment Management
 
 The appointment module provides functionality for:
@@ -193,7 +232,7 @@ The medical records module provides:
 
 Security is an important part of Healtheon because the platform handles healthcare-related information.
 
-The current backend implementation includes:
+The current implementation includes:
 
 * Password hashing using bcrypt
 * JWT-based authentication
@@ -206,7 +245,7 @@ The current backend implementation includes:
 * Database-level data access
 * Password exclusion from profile responses
 
-The security implementation will undergo an additional review before production deployment.
+A final security review will be performed before production deployment.
 
 ## API Development
 
@@ -268,6 +307,97 @@ Additional doctor appointment and appointment-status operations are implemented 
 
 All protected endpoints require appropriate authentication and authorization.
 
+## Frontend
+
+The Healtheon frontend provides separate interfaces for patients and doctors.
+
+### Main Frontend Routes
+
+```text
+/
+ /login
+ /register
+ /dashboard
+ /profile
+ /appointments
+ /medical-records
+ /doctor-dashboard
+```
+
+### Patient Functionality
+
+Patients can:
+
+* Register and log in
+* Access their dashboard
+* View their profile
+* Request appointments
+* View appointments
+* View medical records
+* Navigate between protected healthcare sections
+
+### Doctor Functionality
+
+Doctors can:
+
+* Log in using an authenticated account
+* Access the Doctor Dashboard
+* View relevant appointments
+* Update appointment status
+* Access functionality based on doctor authorization
+
+### Frontend API Configuration
+
+The frontend uses a centralized API configuration:
+
+```text
+frontend/src/lib/api.ts
+```
+
+The API base URL is controlled through:
+
+```text
+NEXT_PUBLIC_API_URL
+```
+
+Local development uses:
+
+```text
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+This prevents application pages from directly hard-coding the backend URL and makes the frontend suitable for deployment with a production backend URL.
+
+The local environment file is excluded from Git using:
+
+```text
+.env*
+```
+
+## Frontend Production Verification
+
+The frontend production build was successfully verified using:
+
+```bash
+npm run build
+```
+
+The build completed successfully with:
+
+```text
+✓ Compiled successfully
+✓ Finished TypeScript
+✓ Collecting page data
+✓ Generating static pages (11/11)
+✓ Finalizing page optimization
+```
+
+All major application routes were successfully recognized during the production build.
+
+No frontend build errors were reported.
+
+A Next.js workspace-root warning related to multiple `package-lock.json` files remains, but it does not prevent successful production compilation.
+
 ## Testing
 
 Backend APIs have been tested using Thunder Client.
@@ -291,7 +421,64 @@ Testing performed includes:
 * Invalid appointment requests
 * Unauthorized access attempts
 
-The core backend tests have passed successfully.
+Frontend verification includes:
+
+* Login page
+* Registration page
+* Dashboard
+* Profile
+* Appointments
+* Medical Records
+* Doctor Dashboard
+* Frontend navigation
+* Authentication flow
+* Protected page behavior
+* Frontend/backend API communication
+* Browser console verification
+* Production build verification
+
+The core application functionality has been successfully tested.
+
+## Version Control
+
+Healtheon uses Git and GitHub for version control.
+
+The complete full-stack project is maintained in a single repository.
+
+Development follows a commit-based workflow where meaningful completed changes are committed and pushed to GitHub.
+
+Repository:
+
+```text
+https://github.com/anushreeadyanthaya/Healtheon.git
+```
+
+The latest frontend production-readiness changes were committed using:
+
+```text
+Make frontend API URL configurable
+```
+
+and successfully pushed to the `main` branch.
+
+## Current Project Completion
+
+| Area                           |   Status |
+| ------------------------------ | -------: |
+| Backend                        |     100% |
+| Frontend                       |     100% |
+| Database & APIs                |     100% |
+| Authentication & Authorization |     100% |
+| Appointments                   |     100% |
+| Medical Records                |     100% |
+| Doctor Functionality           |     100% |
+| Frontend–Backend Integration   |     100% |
+| Core Testing                   |     100% |
+| Documentation                  |     ~75% |
+| Deployment                     |  Pending |
+| **Overall Project**            | **~90%** |
+
+The application itself is essentially complete. The remaining project work is primarily release-oriented.
 
 ## Goals
 
@@ -310,7 +497,7 @@ The primary goals of Healtheon are:
 
 ## Future Enhancements
 
-Potential future improvements include:
+The following features are considered potential future enhancements and are **not part of the current completion scope**:
 
 * Real-time notifications
 * Email or SMS appointment reminders
@@ -322,6 +509,8 @@ Potential future improvements include:
 * Improved appointment scheduling
 * Additional security enhancements
 * Cloud deployment and production monitoring
+
+These features should only be considered after the current Healtheon release is completed.
 
 ## Installation
 
@@ -372,6 +561,12 @@ Install dependencies:
 npm install
 ```
 
+For local development, configure:
+
+```text
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
 Start the frontend development server:
 
 ```bash
@@ -384,19 +579,7 @@ The frontend runs locally on:
 http://localhost:3000
 ```
 
-## Version Control
-
-Healtheon uses Git and GitHub for version control.
-
-The complete full-stack project is maintained in a single repository.
-
-Development follows a commit-based workflow where meaningful completed changes are committed and pushed to GitHub.
-
-Repository:
-
-```text
-https://github.com/anushreeadyanthaya/Healtheon
-```
+For production deployment, `NEXT_PUBLIC_API_URL` should point to the deployed backend URL.
 
 ## Documentation
 
@@ -411,10 +594,44 @@ The project handbook documents:
 * Authorization
 * Medical records
 * Appointment management
+* Frontend architecture
+* Frontend/backend integration
 * Testing
 * Version control
 * Deployment
 * Future enhancements
+
+The handbook will be finalized as part of the remaining project completion work.
+
+## Deployment
+
+Production deployment has not yet been completed.
+
+The deployment phase will include:
+
+* Deploying the backend
+* Configuring production environment variables
+* Deploying the frontend
+* Connecting the frontend to the production backend URL
+* Verifying production API communication
+* Performing final production testing
+* Confirming authentication and protected routes in production
+
+## Final Release Checklist
+
+Before declaring Healtheon fully complete:
+
+* [ ] Complete final handbook/documentation
+* [ ] Deploy backend
+* [ ] Deploy frontend
+* [ ] Configure production API URL
+* [ ] Verify production authentication
+* [ ] Verify production appointments
+* [ ] Verify production medical records
+* [ ] Verify doctor functionality
+* [ ] Perform final production security review
+* [ ] Perform final end-to-end production verification
+* [ ] Confirm final GitHub state
 
 ## Author
 
