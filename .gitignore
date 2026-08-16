@@ -22,3 +22,6 @@ Thumbs.db
 
 # VS Code
 .vscode/
+# Local Environment Variables
+.env.local
+**/.env.local
