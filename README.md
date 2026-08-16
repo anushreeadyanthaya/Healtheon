@@ -4,13 +4,9 @@ Healtheon is a full-stack Healthcare Management Platform developed to simplify a
 
 The objective of Healtheon is to provide a centralized platform where patients and healthcare providers can manage essential healthcare operations efficiently while maintaining security, privacy, and reliable access to information.
 
-## Live Application
+## 🌍 Live Website
 
-🌍 **Live Website:** https://healtheon-frontend.onrender.com
-
-🔗 **Backend API:** https://healtheon-backend.onrender.com
-
-💻 **GitHub Repository:** https://github.com/anushreeadyanthaya/Healtheon
+https://healtheon-frontend.onrender.com
 
 ## Project Status
 
